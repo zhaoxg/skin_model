@@ -209,7 +209,9 @@ to try-fundraise [a-firm]
       let one-firm-info table:make
       table:put one-firm-info "init-capital" firm-init-capital
       table:put invested-firm-table ([who] of a-firm) one-firm-info
-      ;2.
+      ;2. 修改资本相关
+      set investable-capital investable-capital - firm-init-capital
+      set invested-capital invested-capital + firm-init-capital
     ]
   ]
 end
