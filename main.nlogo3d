@@ -178,7 +178,7 @@ to try-fundraise [a-firm]
     let retry-count 0
     let candidates no-turtles
     while retry-count < 5 [
-      set candidates n-of 50 institutions
+      set candidates n-of (min list 50 count institutions) institutions
       set candidates candidates with [investable-capital >= [capital] of a-firm]
       if any? candidates [
         ; 找到后退出
@@ -200,7 +200,7 @@ to try-fundraise [a-firm]
       ; 1. 增加资金
 
       ; 1. 记录下融资的企业
-      set institution matched-institution
+      set on-institution matched-institution
 
     ]
     ; 2. 修改金融机构信息
@@ -252,7 +252,7 @@ to try-exit-fundraise [a-firm]
     let half (round capital / 2)
 
     ask a-firm [
-      set institution nobody
+      set on-institution nobody
       set invested-success true
       set previous-institutions fput related-institution previous-institutions
       set previous-institutions remove-duplicates previous-institutions
