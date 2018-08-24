@@ -251,8 +251,14 @@ to try-exit-fundraise [a-firm]
     let capital ([capital] of a-firm)
     let half (round capital / 2)
 
-    ; TODO 从企业中扣掉一半的值资金，给金融机构
-    ; TODO 企业里去掉该金融机构的关联关系
+    ask a-firm [
+      set institution nobody
+      set invested-success true
+      set previous-institutions fput related-institution previous-institutions
+      set previous-institutions remove-duplicates previous-institutions
+      ; TODO 从企业中扣掉一半的值资金 修改其他信息
+    ]
+
 
     ask related-institution [
       set investable-capital investable-capital + half
